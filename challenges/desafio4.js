@@ -2,7 +2,17 @@ db.movies.aggregate([
   {
     $match: {
       //  titulos com tamanho = 1
-      $expr: { $eq: [{ $size: { $split: ["$title", " "] } }, 1] }
+      $expr: {
+        $eq: [
+          { $size: { $split: ["$title", " "] } },
+          1
+        ]
+      }
+    }
+  },
+  {
+    $sort: {
+      title_split: 1
     }
   },
   {
@@ -12,11 +22,6 @@ db.movies.aggregate([
       //  { "title_split" : [ "titulo" ] } ao invés de
       //  { "title_split" : "titulo" }
       title_split: { $split: ["$title", " "] }
-    }
-  },
-  {
-    $sort: {
-      title_split: 1
     }
   }
 ]);

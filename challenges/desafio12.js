@@ -8,6 +8,7 @@ db.trips.aggregate([
   },
   {
     $group: {
+      //  _id: chave composta por duas chaves
       _id: {
         id: "$startStationId",
         name: "$startStationName"
