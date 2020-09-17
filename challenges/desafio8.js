@@ -26,7 +26,7 @@ db.air_alliances.aggregate([
   },
   {
     $group: {
-      //  agrupa pelo nome da companhia
+      //  agrupa pelo nome da alliance
       _id: "$name",
       //  soma as rotas
       totalRotas: { $sum: 1 }
