@@ -7,4 +7,4 @@ db.movies.aggregate([
       languages: { $all: ["English", "Spanish"] },
     },
   },
-]);
+]).itcount();
