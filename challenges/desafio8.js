@@ -1,6 +1,6 @@
 db.air_alliances.aggregate([
   {
-    //  separando por nomes das companhias na array
+    //  separando nomes das companhias na array
     $unwind: "$airlines"
   },
   {
@@ -21,7 +21,7 @@ db.air_alliances.aggregate([
     }
   },
   {
-    //  separando por routes
+    //  separando routes
     $unwind: "$routes"
   },
   {
