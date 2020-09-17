@@ -24,13 +24,6 @@ db.movies.aggregate([
     }
   },
   {
-    $project: {
-      _id: 0,
-      title: 1,
-      //  num_favs: 1
-    }
-  },
-  {
     $sort: {
       num_favs: -1,
       "tomatoes.viewer.rating": -1,
@@ -42,5 +35,12 @@ db.movies.aggregate([
   },
   {
     $limit: 1
+  },
+  {
+    $project: {
+      _id: 0,
+      title: 1,
+      //  num_favs: 1
+    }
   }
 ]);
