@@ -1,4 +1,4 @@
-var atores = [
+const atores = [
   "Sandra Bullock",
   "Tom Hanks",
   "Julia Roberts",
