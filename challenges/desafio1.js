@@ -7,7 +7,4 @@ db.movies.aggregate([
       $or: [{ rated: "PG" }, { rated: "G" }],
     },
   },
-  // {
-  //   $project: { title: 1, genres: 1, languages: 1, rated: 1, "imdb.rating": 1 },
-  // },
 ]);
