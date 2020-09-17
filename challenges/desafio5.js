@@ -1,3 +1,1 @@
-db.movies.aggregate([{
-  
- }]);
+db.movies.aggregate([{}]);
