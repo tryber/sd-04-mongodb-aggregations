@@ -1,3 +1,4 @@
+// DESAFIO 10
 // Encontre a média de viagens por tipo de usuário. Exiba o valor em horas com apenas duas casas decimais e a média de viagens ordenada de forma crescente. Para arredondar a média use o $round.
 
 // O resultado da sua query deve ter o seguinte formato:
@@ -6,25 +7,21 @@
 
 db.trips.aggregate([
   {
-    $project: {
-      _id: 0,
-      tipo: "$usertype",
+    $group: {
+      _id: "$usertype",
       duracaoMedia: {
-        $divide: [{ $subtract: ["$stopTime", "$startTime"] }, 60000],
+        $avg: {
+          $divide: [{ $subtract: ["$stopTime", "$startTime"] }, 3600000],
+        },
       },
     },
   },
   {
-    $group: {
-      _id: "$tipo",
-      duracaoMedia: { $avg: "$duracaoMedia" },
-    },
-  },
-  {
     $project: {
-      tipo: "$id",
+      _id: 0,
+      tipo: "$_id",
       duracaoMedia: { $round: ["$duracaoMedia", 2] },
     },
   },
-  { $sort: { duracaoMedia: 1 } }
+  { $sort: { duracaoMedia: 1 } },
 ]);
