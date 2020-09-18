@@ -16,7 +16,7 @@ db.movies.aggregate([
       votosIMDB: "$imdb.votes",
       ano: "$year"
     }
-  }
+  },
   {
     $sort: {
       ano: -1,
