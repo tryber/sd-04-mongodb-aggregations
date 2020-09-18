@@ -2,7 +2,7 @@ db.movies.aggregate([
     {
       $match: {
         awards: {
-          $regex: /^won \d oscar/i, //refatoração baseada no PR do Yoshi (antes estava utilizando 'AND: []')
+          $regex: /won \d oscar/i, //refatoração baseada no PR do Yoshi (antes estava utilizando 'AND: []')
         },
       },
     },
