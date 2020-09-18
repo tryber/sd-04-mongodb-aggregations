@@ -3,14 +3,14 @@ db.trips.aggregate([
     $match: {
       $expr: {
         $eq: [
-          {$dayOfWeek: "$startTime"},
+          { $dayOfWeek: "$startTime" },
           5
         ]
       }
     }
   }, {
     $group: {
-      _id: "$endStationName",
+      _id: "$startStationName",
       soma: {
         $sum: 1
       }
@@ -31,4 +31,4 @@ db.trips.aggregate([
   {
     $limit: 1
   }
-]).pretty();
+]);
