@@ -1,4 +1,3 @@
-
 db.trips.aggregate([
   {
     $match: {
@@ -8,7 +7,7 @@ db.trips.aggregate([
   },
   {
     $addFields: {
-      convertedBirth: { $toInt: "$birthYear" },
+      newYear: { $toInt: "$birthYear" },
     },
   },
   {
