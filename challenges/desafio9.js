@@ -27,4 +27,4 @@ db.trips.aggregate([
       }
     }
   }
-]).pretty();
+]);
