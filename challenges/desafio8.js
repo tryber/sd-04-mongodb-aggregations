@@ -19,11 +19,6 @@ db.air_alliances.aggregate([
       as: "mergedAirlines",
     },
   },
-  {
-    $match: {
-      mergedAirlines: { $not: { $size: 0 } },
-    },
-  },
   { $unwind: "$mergedAirlines" },
   {
     $group: {
