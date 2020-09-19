@@ -1,9 +1,5 @@
 db.trips.aggregate([
-  {
-    $match: {
-      birthYear: { $ne: [""] },
-    },
-  },
+  { $match: { birthYear: { $ne: "" } } },
   {
     $group: {
       _id: null,
@@ -11,9 +7,5 @@ db.trips.aggregate([
       menorAnoNascimento: { $min: { $toInt: "$birthYear" } },
     },
   },
-  {
-    $project: {
-      _id: 0,
-    },
-  },
+  { $project: { _id: 0 } },
 ]);
