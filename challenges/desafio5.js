@@ -5,16 +5,16 @@ db.movies.aggregate([
     $match: {
       countries: "USA",
       "tomatoes.viewer.rating": { $gte: 3 },
+      cast: { $exists: 1 }
     }
   },
-  {
-    $addFields: {
+  { $addFields: {
       num_favs: {
         $size: {
-          $setIntersection: [ActressAndActors, "$cast"]
+          $setIntersection: [ ActressAndActors, "$cast" ]
         }
       }
-    }
+    } 
   },
   {
     $sort: {
