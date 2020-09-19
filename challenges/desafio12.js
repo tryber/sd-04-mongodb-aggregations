@@ -1,32 +1,33 @@
 db.trips.aggregate([
-    {
-      $addFields: {
-        diaDaSemana: { $dayOfWeek: "$startTime" },
-        nomeEstacao: "$startStationName"
-      },
+  {
+    $addFields: {
+      diaDaSemana: { $dayOfWeek: "$startTime" },
+      nomeEstacao: "$startStationName",
     },
-    {$match: {
-        diaDaSemana: {$eq: 5}
-    }},
+  },
+  {
+    $match: {
+      diaDaSemana: { $eq: 5 },
+    },
+  },
 
-    {
-      $group: {
-        _id: "$nomeEstacao",
-        total: { $sum: 1 },
-      },
+  {
+    $group: {
+      _id: "$nomeEstacao",
+      total: { $sum: 1 },
     },
-    {
-      $sort: {
-        total: -1,
-      },
+  },
+  {
+    $sort: {
+      total: -1,
     },
-    {
-      $project: {
-        _id: 0,
-        nomeEstacao: "$_id",
-        total: "$total",
-      },
+  },
+  {
+    $project: {
+      _id: 0,
+      nomeEstacao: "$_id",
+      total: "$total",
     },
-    { $limit: 1 },
-  ]);
-  
+  },
+  { $limit: 1 },
+]);
