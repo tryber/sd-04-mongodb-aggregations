@@ -1,4 +1,4 @@
-const miliSecToMinuteFactor = 1000 * 60;
+const miliSecToMinute = 1000 * 60;
 
 db.trips.aggregate([
   {
@@ -21,10 +21,10 @@ db.trips.aggregate([
   },
   {
     $project: {
-      _id: 0,
+      _id: false,
       duracaoMediaEmMinutos: {
         $ceil: {
-          $divide: ["$duracaoMediaEmMinutos", miliSecToMinuteFactor],
+          $divide: ["$duracaoMediaEmMinutos", miliSecToMinute],
         },
       },
     },
