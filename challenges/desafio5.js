@@ -3,8 +3,8 @@ const ActressAndActors = [ "Sandra Bullock", "Tom Hanks", "Julia Roberts", "Kevi
 db.movies.aggregate([
   {
     $match: {
-      countries: "Estados Unidos",
-      "tomatoes.viewer.rating": { $gte: 3 }
+      countries: "USA",
+      "tomatoes.viewer.rating": { $gte: 3 },
     }
   },
   {
@@ -14,12 +14,6 @@ db.movies.aggregate([
           $setIntersection: [ ActressAndActors, "$cast"]
         }
       }
-    }
-  },
-  {
-    $project: {
-      _id: 0,
-      title: 1
     }
   },
   {
@@ -34,5 +28,11 @@ db.movies.aggregate([
   },
   {
     $limit: 1
+  },
+  {
+    $project: {
+      _id: 0,
+      title: 1
+    }
   }
 ]);
