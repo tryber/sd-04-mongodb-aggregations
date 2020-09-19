@@ -19,5 +19,5 @@ db.trips.aggregate([
       total: "$total",
     },
   },
-  { $limit: true },
+  { $limit: 1 },
 ]);
