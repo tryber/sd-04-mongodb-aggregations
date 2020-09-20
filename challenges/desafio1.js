@@ -7,7 +7,4 @@ db.movies.aggregate([
       languages: { $all: ["English", "Spanish"] },
     },
   },
-  {
-    $count: count,
-  },
 ]);
