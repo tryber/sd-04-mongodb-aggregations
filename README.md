@@ -250,7 +250,24 @@ O resultado da sua query deve ter o seguinte formato:
 A partir da coleção `trips`, determine o menor e o maior ano de nascimento. Guarde essa informação, você precisará dela mais tarde.
 
 Não considere documentos com valores vazios (`""`) ou em que o campo não existe!
-
+{
+    $group: {
+      _id: null,
+      maior_rating: { $max: "$imdb.rating" },
+      menor_rating: { $min: "$imdb.rating" },
+      media_rating: { $avg: "$imdb.rating" },
+      desvio_padrao: { $stdDevSamp: "$imdb.rating" },
+    },
+  },
+  {
+    $project: {
+      _id: 0,
+      maior_rating: 1,
+      menor_rating: 1,
+      media_rating: { $round: ["$media_rating", 1] },
+      desvio_padrao: { $round: ["$desvio_padrao", 1] },
+    },
+  },
 Para este desafio utilize o operador [`$toInt`](https://docs.mongodb.com/manual/reference/operator/aggregation/toInt/index.html) para converter de string para valor inteiro.
 
 O resultado da sua query deve ter o seguinte formato:
@@ -262,7 +279,24 @@ O resultado da sua query deve ter o seguinte formato:
 ##### Desafio 10
 
 Encontre a média de viagens por tipo de usuário. Exiba o valor em horas com apenas duas casas decimais e a média de viagens ordenada de forma crescente. Para arredondar a média use o [`$round`](https://docs.mongodb.com/manual/reference/operator/aggregation/round/index.html).
-
+{
+    $group: {
+      _id: null,
+      maior_rating: { $max: "$imdb.rating" },
+      menor_rating: { $min: "$imdb.rating" },
+      media_rating: { $avg: "$imdb.rating" },
+      desvio_padrao: { $stdDevSamp: "$imdb.rating" },
+    },
+  },
+  {
+    $project: {
+      _id: 0,
+      maior_rating: 1,
+      menor_rating: 1,
+      media_rating: { $round: ["$media_rating", 1] },
+      desvio_padrao: { $round: ["$desvio_padrao", 1] },
+    },
+  },
 O resultado da sua query deve ter o seguinte formato:
 
 ```javascript
@@ -294,7 +328,24 @@ O resultado da sua query deve ter o seguinte formato:
 { "nomeEstacao" : <nome_da_estacao>, "total" : <total_de_viagens> }
 ```
 
-##### Desafio 13
+##### Desafio 13{
+    $group: {
+      _id: null,
+      maior_rating: { $max: "$imdb.rating" },
+      menor_rating: { $min: "$imdb.rating" },
+      media_rating: { $avg: "$imdb.rating" },
+      desvio_padrao: { $stdDevSamp: "$imdb.rating" },
+    },
+  },
+  {
+    $project: {
+      _id: 0,
+      maior_rating: 1,
+      menor_rating: 1,
+      media_rating: { $round: ["$media_rating", 1] },
+      desvio_padrao: { $round: ["$desvio_padrao", 1] },
+    },
+  },
 
 Determine a duração média das viagens iniciadas no dia `10/03/2016`, em minutos. Arredonde o resultado para cima.
 
