@@ -8,5 +8,5 @@ db.trips.aggregate([
     tipo: "$_id",
     duracaoMedia: {$round: [{$divide: ["$duracaoMedia", 60*60*1000]}, 2]}
   }},
-{$sort: {dudacaoMedia: 1}}
+{$sort: {duracaoMedia: 1}}
 ]);
