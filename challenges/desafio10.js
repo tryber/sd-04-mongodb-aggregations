@@ -15,7 +15,7 @@ db.trips.aggregate([
       _id: 0,
       tipo: "$_id",
       duracaoMedia: {
-        $round: [{ $divide: ["$duracaoMedia", 3600 * 1000] }, 2], //um dia tem 360 segundos
+        $round: [{ $divide: ["$duracaoMedia", 3600 * 1000] }, 2], //um dia tem 3600 segundos
       },
     },
   },
