@@ -1,52 +1,39 @@
-const actors = [
-  "Sandra Bullock",
-  "Tom Hanks",
-  "Julia Roberts",
-  "Kevin Spacey",
-  "George Clooney"
-];
-
 db.movies.aggregate([
   {
     $match: {
-      "countries": "USA",
-      "tomatoes.viewer.rating": {
-        $gte: 3
+      "awards": {
+        $regex: /Won \d{1,10} Oscar[s]?/
+      }
+    }
+  },
+  {
+    $group: {
+      "_id": null,
+      "maior_rating": { 
+        $max: "$imdb.rating"
       },
-      "cast": { 
-        $exists: true,
-        $not: { 
-          $eq: null
-        }
+      "menor_rating": {
+        $min: "$imdb.rating"
+      },
+      "media_rating": {
+        $avg: "$imdb.rating"
+      },
+      "desvio_padrao": {
+        $stdDevSamp: "$imdb.rating"
       }
     }
-  },
-  {
-    $addFields: {
-      "num_favs": {
-        $size: {
-          $setIntersection: [ "$cast", actors ]
-        }
-      }
-    }
-  },
-  {
-    $sort: {
-      "num_favs": -1,
-      "tomatoes.viewer.rating": -1,
-      "title": -1
-    }
-  },
-  {
-    $skip: 24
-  },
-  {
-    $limit: 1
   },
   {
     $project: {
       "_id": 0,
-      "title": 1
+      "maior_rating": 1,
+      "menor_rating": 1,
+      "media_rating": {
+        $round: [ "$media_rating", 1 ]
+      },
+      "desvio_padrao": {
+        $round: [ "$desvio_padrao", 1 ]
+      }
     }
   }
 ]);
