@@ -14,5 +14,8 @@ db.movies.aggregate([
         $all: [ "English", "Spanish" ]
       }
     }
+  },
+  {
+    
   }
 ]);
