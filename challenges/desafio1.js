@@ -1,6 +1,9 @@
 db.movies.aggregate([
-  {$match:{"imdb.rating":{$gte:7},"genres":{$ne:["Crime","Horror"]},$or:[{"rated":{$eq:"PG"}},{"rated":{$eq:"G"}}],$and:[{languages:"English"},{languages:"Spanish"}]}}
-])
+  {$match:{"imdb.rating":{$gte:7},
+  "genres":{$ne:["Crime","Horror"]},
+  $or:[{"rated":{$eq:"PG"}},{"rated":{$eq:"G"}}],
+  $and:[{languages:"English"},{languages:"Spanish"}]}}
+]);
 
 /* Ajude a Trybe a escolher um filme para a próxima noite! 
 Baseado em uma pesquisa, decidimos que os filmes em potencial devem atender aos seguintes critérios:
