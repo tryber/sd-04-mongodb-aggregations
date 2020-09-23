@@ -1,34 +1,36 @@
 db.trips.aggregate([
   {
-    $match: {
-      "startTime": {
-        $gte: ISODate("2016-03-10")
-      }
-    }
-  },
-  {
     $addFields: {
-      "duracaoMediaEmMinutos": {
+      "duracaoMedia": {
         $subtract: [ "$stopTime", "$startTime" ]
       }
     }
   },
   {
     $group: {
-      "_id": null,
-      "duracaoMediaEmMinutos": {
-        $avg: "$duracaoMediaEmMinutos"
+      "_id": "$bikeid",
+      "duracaoMedia": {
+        $avg: "$duracaoMedia"
       }
     }
   },
   {
     $project: {
       "_id": 0,
-      "duracaoMediaEmMinutos": {
+      "bikeId": "$_id",
+      "duracaoMedia": {
         $ceil: {
-          $divide: [ "$duracaoMediaEmMinutos", 60000 ]
+          $divide: [ "$duracaoMedia", 60000 ]
         }
       }
     }
+  },
+  {
+    $sort: {
+      "duracaoMedia": -1
+    }
+  },
+  {
+    $limit: 5
   }
 ]);
