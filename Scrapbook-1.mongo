@@ -1,0 +1,53 @@
+db.movies.find().limit(40).pretty();
+
+db.movies.aggregate([
+  {
+    $match: {
+      $or:[{
+      'imdb.rating': { $gte: 7 },
+      languages: { $all: ['English','Spanish'] },
+      genres: { $ne: ['Crime', 'Horror'] },
+      rated: { $eq: 'PG', $eq: 'G' }
+      }]
+    }
+  }
+]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//   "imdb.rating": { $gte: NumberDecimal("7.0"), $lte: NumberDecimal("10.0") },
+//           "languages": { $eq: ['English', 'Spanish']},
+//           "genres": { $ne: ['Crime','Horror'] },
+//           "rated": { $eq: 'PG'},
+//           "rated": { $eq: 'G' }
