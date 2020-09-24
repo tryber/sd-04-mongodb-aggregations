@@ -18,8 +18,8 @@ db.trips.aggregate([
   },
   {
     $addFields: {
-      diaComMaisViagens: { $dayOfWeek: "$startTime" }
-    }
+      diaComMaisViagens: { $dayOfWeek: "$startTime" },
+    },
   },
   { $match: { diaComMaisViagens: 5 } },
   {
