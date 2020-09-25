@@ -17,5 +17,10 @@ db.trips.aggregate([
         $min: { $toInt: "$birthYear" }
       }
     }
+  },
+  {
+    $project: {
+      _id: 0,
+    }
   }
 ]);
