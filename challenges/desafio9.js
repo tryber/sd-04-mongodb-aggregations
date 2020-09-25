@@ -13,7 +13,7 @@ db.trips.aggregate([
       maiorAnoNascimento: {
         $max: { $toInt: "$birthYear" }
       },
-      menorAnoNascimeto: {
+      menorAnoNascimento: {
         $min: { $toInt: "$birthYear" }
       }
     }
