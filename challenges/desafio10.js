@@ -17,12 +17,16 @@ db.trips.aggregate([
   }, {
     "$project": {
       "_id": 0,
-      "type": "$usertype",
+      "type": "$_id",
       "duracaoMedia": {
         "$round": [
           "$duracaoMedia", 2
         ]
       }
+    }
+  }, {
+    "$sort": {
+      "duracaoMedia": 1
     }
   }
 ]);
