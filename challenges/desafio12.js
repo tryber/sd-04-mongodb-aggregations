@@ -1,51 +1,28 @@
 db.trips.aggregate([
   {
+    $match: {
+      $expr: {
+        $eq: [{ $dayOfWeek: "$startTime" }, 5],
+      },
+    },
+  },
+  {
     $group: {
-      _id: { $dayOfWeek: "$startTime" },
+      _id: "$startStationName",
       total: { $sum: 1 },
     },
   },
   {
-    $sort: {
-      total: -1,
-    },
+    $sort: { total: -1 },
   },
   {
     $limit: 1,
   },
   {
-    $lookup: {
-      from: "trips",
-      let: { dayOfWeek: "$_id" },
-      pipeline: [
-        {
-          $match: {
-            $expr: { $eq: [{ $dayOfWeek: "$startTime" }, "$$dayOfWeek"] },
-          },
-        },
-        {
-          $group: {
-            _id: "$startStationName",
-            totalTravels: { $sum: 1 },
-          },
-        },
-        {
-          $sort: {
-            totalTravels: -1,
-          },
-        },
-        {
-          $limit: 1,
-        }
-      ],
-      as: "popularStation",
+    $project: {
+      _id: false,
+      nomeEstacao: "$_id",
+      total: "$total",
     },
   },
-  {
-      $project: {
-          _id: false,
-          nomeEstacao: {$first: "$popularStation._id"},
-          total: {$first: "$popularStation.totalTravels"}
-      }
-  }
 ]);
