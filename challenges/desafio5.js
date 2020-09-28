@@ -16,14 +16,8 @@ db.movies.aggregate([
   {
     $addFields: {
       num_favs: {
-        $size: { $setIntersection: [names, cast] }
+        $size: { $setIntersection: [names, "$cast"] }
       },
-    }
-  },
-  {
-    $project: {
-      _id: 0,
-      title: 1
     }
   },
   {
@@ -33,6 +27,12 @@ db.movies.aggregate([
       title: -1
     }
   },
-  { $skip: 25 },
+  {
+    $project: {
+      _id: 0,
+      title: 1
+    }
+  },
+  { $skip: 24 },
   { $limit: 1 }
 ]);
