@@ -6,4 +6,3 @@ db.movies.aggregate([
     },
   },
 ]);
- 
