@@ -33,6 +33,6 @@ db.movies.aggregate([
       title: -1
     }
   },
-  { $skip: 24 },
+  { $skip: 25 },
   { $limit: 1 }
 ]);
