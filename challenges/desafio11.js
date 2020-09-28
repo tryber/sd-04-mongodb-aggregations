@@ -5,7 +5,7 @@ db.trips.aggregate([
         "$dayOfWeek": "$startTime"
       },
       "total": {
-        "$sum": 1
+        $sum: 1
       }
     }
   }, {
