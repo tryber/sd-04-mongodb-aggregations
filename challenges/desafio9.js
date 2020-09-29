@@ -6,17 +6,17 @@ db.trips.aggregate([
     }
   },
   {
-    $group: {
+    $project: {
       _id: null,
-      maiorAnoNascimento: { $max: "$birthYear" },
-      menorAnoNascimento: { $min: "$birthYear" },
+      maiorAnoNascimento: { $toInt: "$birthYear" },
+      menorAnoNascimento: { $toInt: "$birthYear" },
     }
   },
   {
-    $project: {
+    $group: {
       _id: 0,
-      maiorAnoNascimento: { $toInt: "$maiorAnoNascimento" },
-      menorAnoNascimento: { $toInt: "$menorAnoNascimento" },
+      maiorAnoNascimento: { $max: "$maiorAnoNascimento" },
+      menorAnoNascimento: { $min: "$menorAnoNascimento" },
     }
-  }
+  },
 ]);
