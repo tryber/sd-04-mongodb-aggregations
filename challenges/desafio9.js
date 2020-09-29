@@ -16,4 +16,4 @@ db.trips.aggregate([
       menorAnoNascimento: { $toInt: "$menorAnoNascimento" },
     }
   }
-]).pretty();
+]);
