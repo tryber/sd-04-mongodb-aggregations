@@ -21,9 +21,8 @@ db.movies.aggregate([
   },
   {
     $sort: {
-      _id: -1,
       numeroFilmes: -1,
-      mediaIMDB: -1
+      _id: -1,
     }
   }
 ]);
