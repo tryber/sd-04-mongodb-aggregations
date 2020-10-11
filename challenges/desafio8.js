@@ -17,6 +17,6 @@ db.air_alliances.aggregate([
   },
   { $unwind: "$companysFound" },
   { $group: { _id: "$name", totalRotas: { $sum: 1 } } },
-  { $skip: 2 },
+  { $sort: {totalRotas: -1} },
   { $limit: 1 },
 ]);
