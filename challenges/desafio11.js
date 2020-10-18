@@ -1,4 +1,4 @@
- db.trips.aggregate([
+db.trips.aggregate([
   {
     $group: {
       _id: { $dayOfWeek: "$startTime" },
