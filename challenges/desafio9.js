@@ -27,11 +27,3 @@ O resultado da sua query deve ter o seguinte formato:
 
 { "maiorAnoNascimento" : <ano>, "menorAnoNascimento" : <ano> }
 */
-
-const newUser = async (req, res) => {
-  const isValid = await validationModel({ ...req.body });
-  if (isValid) {
-    await userModel.createUser({ ...req.body });
-    return res.render("cadastro", { ...isValid });
-  }
-};
