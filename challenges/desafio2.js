@@ -1,0 +1,7 @@
+db.movies.aggregate([
+{$match: {"imdb.rating": {$gte: 7}}},
+{$match: {$and: [{"genres": {$ne: "Crime"}}, {"genres": {$ne: "Horror"}}]}},
+{$match: {$or: [{"rated": "PG"}, {"rated": "G"}]}},
+{$match: {$and: [{"languages": "English"}, {"languages": "Spanish"}]}},
+{$project: {"titulo": "$title", "avaliado": "$rated", "notaIMDB": "$imdb.rating", "votosIMDB": "$imdb.votes", "ano": "$year", "_id":0 }}
+]);
