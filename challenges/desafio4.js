@@ -6,7 +6,7 @@ db.movies.aggregate([
   },
   {
     $project: {
-      "title_split": "$title",
+      "title_split": { $split: ["$title", " "] },
       "_id": false
     }
   },
