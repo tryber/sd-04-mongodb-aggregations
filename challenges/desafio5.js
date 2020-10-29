@@ -1,6 +1,5 @@
 // Desafio 5
 // Temos outra noite de filme aqui na Trybe e, desta vez, nós perguntamos à equipe quais são seus atores ou atrizes preferidos. Aqui está o resultado:
-
 // Sandra Bullock
 // Tom Hanks
 // Julia Roberts
@@ -19,4 +18,23 @@
 
 // { "title" : <nome_do_filme> }
 
-db.movies.aggregate([]);
+const actors = [ "Sandra Bullock", "Tom Hanks", "Julia Roberts", "Kevin Spacey", "George Clooney"];
+
+db.movies.aggregate([
+  {
+    $match: { $and: [
+      { countries: "USA" },
+      { "tomatoes.viewer.rating": { $gte: 3 } },
+      { cast: { $exists: 1} }
+    ]}
+  },
+  {
+    $addFields: {
+      num_favs: { $size: { $setIntersection: [actors, "$cast"] } }
+    }
+  },
+  { $sort: { num_favs: -1, "tomatoes.viewer.rating": -1, title: -1 } },
+  { $project: { title: 1, _id: 0 } },
+  { $skip: 24 },
+  { $limit: 1 }
+]);
