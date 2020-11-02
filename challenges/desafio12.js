@@ -33,6 +33,6 @@ db.trips.aggregate([
     },
   },
   {
-     $limit: 1
+    $limit: 1
   },
 ]);
